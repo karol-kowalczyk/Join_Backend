@@ -22,3 +22,4 @@ class ContactListView(APIView):
         
         # Fehlerhafte Daten zurückgeben
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    

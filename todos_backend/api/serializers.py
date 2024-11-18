@@ -6,7 +6,7 @@ from contacts.models import Contact
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ['name', 'email', 'handy'] # optional, was im Input und was im Output angezeigt werden soll
+        fields = ['name', 'email', 'phone'] # optional, was im Input und was im Output angezeigt werden soll
 
     def validate_handy(self, value):
         if not re.fullmatch(r'^\+?[0-9]+$', value):
