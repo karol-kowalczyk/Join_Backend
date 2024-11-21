@@ -6,12 +6,12 @@ from contacts.models import Contact
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ['name', 'email', 'phone'] # optional, was im Input und was im Output angezeigt werden soll
+        fields = ['id','name', 'email', 'phone'] # optional, was im Input und was im Output angezeigt werden soll
 
-    def validate_handy(self, value):
-        if not re.fullmatch(r'^\+?[0-9]+$', value):
+    def validate_phone(self, value):
+        if not re.fullmatch(r'^\+?[0-9]+$', str(value)):
             raise serializers.ValidationError(
-                "Phone number is not valid."
+                "Phone number is not valid. It should contain only numbers and may start with a '+'."
             )
         return value
     

@@ -58,6 +58,9 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",  # Erlaubt Anfragen von deinem Frontend (lokal)
     "http://localhost:5500",  # Für den Fall, dass dein Browser 'localhost' verwendet
+    "http://127.0.0.1:5501",  # Für den Fall, dass dein Browser 'localhost' verwendet
+    "http://localhost:5501",
+    "https://karol-kowalczyk.developerakademie.net"
 ]
 
 

@@ -20,7 +20,40 @@ class ContactListView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk=None):
+
+class ContactDetailView(APIView):
+    def get(self, request, pk):
+        try:
+            contact = Contact.objects.get(pk=pk)
+            serializer = ContactSerializer(contact)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Contact.DoesNotExist:
+            return Response({"error": "Contact not found."}, status=status.HTTP_404_NOT_FOUND)
+        
+    
+    def put(self, request, pk):
+        try:
+            contact = Contact.objects.get(pk=pk)
+            serializer = ContactSerializer(contact, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Contact.DoesNotExist:
+            return Response({"error": "Contact not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    def patch(self, request, pk):
+        try:
+            contact = Contact.objects.get(pk=pk)
+            serializer = ContactSerializer(contact, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Contact.DoesNotExist:
+            return Response({"error": "Contact not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
         try:
             contact = Contact.objects.get(pk=pk)
             contact.delete()
