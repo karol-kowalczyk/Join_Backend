@@ -1,7 +1,7 @@
 # contacts/serializers.py
 import re
 from rest_framework import serializers
-from contacts.models import Contact
+from contacts.models import Contact, Task
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +21,8 @@ class ContactSerializer(serializers.ModelSerializer):
                 "Email address is not valid."
             )
         return value
+
+class TaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ['id', 'title', 'description', 'due_date', 'priority']
