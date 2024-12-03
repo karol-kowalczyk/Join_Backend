@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'contacts',
     'rest_framework',
     'rest_framework.authtoken',
+    'user_auth_app'
 ]
 
 REST_FRAMEWORK = {
